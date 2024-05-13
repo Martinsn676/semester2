@@ -1,0 +1,19 @@
+.change-form-button {
+  text-decoration: underline;
+  cursor: pointer;
+}
+#user-forms {
+  > .container {
+    display: none;
+  }
+  &[data-form="login"] {
+    #log-in-form {
+      display: block;
+    }
+  }
+  &[data-form="signup"] {
+    #sign-up-form {
+      display: block;
+    }
+  }
+}
