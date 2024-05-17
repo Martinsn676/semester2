@@ -2,4 +2,26 @@ header {
   .main-logo {
     height: 80px;
   }
+  .account-icon {
+    height: 50px;
+  }
+}
+/* Custom styling for checkbox */
+.form-switch .form-check-input {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+.form-switch .form-check-label {
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  background-color: #e9ecef; /* Light background color */
+  border: 1px solid #ced4da; /* Border color */
+  border-radius: 0.25rem;
+}
+
+.form-switch .form-check-input:checked + .form-check-label {
+  background-color: #007bff; /* Active background color */
+  color: #fff; /* Active text color */
 }

@@ -8,17 +8,104 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Optional JavaScript and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <link href="../css/main.css" rel="stylesheet" />
-    <script type="module" src="./listings.mjs"></script>
+    <script defer type="module" src="./index.mjs"></script>
     <script defer type="module" src="../js/main.mjs"></script>
+    <script defer type="module" src="./listings.mjs"></script>
   </head>
   <body>
     <header></header>
     <main>
+      <div class="d-flex justify-content-center align-items-center flex-row">
+        <form
+          id="listing-filter"
+          class="d-flex flex-column flex-lg-row align-items-lg-center m-1 m-lg-5"
+        >
+          <input
+            class="form-control me-2"
+            type="search"
+            id="search-filter"
+            placeholder="Search"
+            aria-label="Search for title or description"
+          />
+          <button
+            id="search-button"
+            class="btn btn-outline-success"
+            type="submit"
+          >
+            Search
+          </button>
+          <div class="d-flex flex-row m-3">
+            <div class="form-switch mx-2">
+              <input
+                class="form-check-input visually-hidden"
+                type="radio"
+                id="allListings"
+                name="listingFilter"
+                checked
+              />
+              <label class="text-nowrap form-check-label" for="allListings"
+                >All listings</label
+              >
+            </div>
+            <div class="form-switch mx-2">
+              <input
+                class="form-check-input visually-hidden"
+                type="radio"
+                id="onlyActive"
+                name="listingFilter"
+              />
+              <label class="text-nowrap form-check-label" for="onlyActive"
+                >Only Active</label
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+
       <section
         id="product-listings"
         class="d-flex flex-row flex-wrap"
       ></section>
+      <div class="modal" id="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Viewing listing</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer></footer>
   </body>

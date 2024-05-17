@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ActiounHouse login page</title>
+    <title>Actioun House login page</title>
     <link
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
@@ -22,7 +22,7 @@
               <div class="card mt-5">
                 <div class="card-body">
                   <h2 class="text-center">Login</h2>
-                  <form id="loginForm">
+                  <form id="loginForm" novalidate>
                     <div class="form-group">
                       <label for="email">Email</label>
                       <input
@@ -33,6 +33,9 @@
                         placeholder="Enter your email"
                         required
                       />
+                      <div class="invalid-feedback">
+                        Email must end with @stud.noroff.no
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="password">Password</label>
@@ -41,30 +44,48 @@
                         id="password"
                         name="password"
                         class="form-control"
-                        placeholder="Enter your password"
                         value="noroffSucks"
+                        placeholder="Enter your password"
                         required
+                        minlength="8"
                       />
+                      <div class="invalid-feedback">
+                        Password requirement on signup was a password with 8 or
+                        more signs
+                      </div>
+                    </div>
+                    <div
+                      id="loginErrorMessage"
+                      class="mt-2 mb-2 invalid-feedback"
+                    >
+                      Password or email is wrong, please try again
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">
                       Login
                     </button>
                   </form>
+
                   <div id="change-form-sign-up" class="change-form-button">
                     Don't have an account yet?
+                  </div>
+                  <div class="mt-5 d-flex justify-content-center">
+                    <a href="./listings/index.html" class="btn btn-primary"
+                      >View listings as guest</a
+                    >
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div id="sign-up-form" class="container">
           <div class="row justify-content-center">
             <div class="col-md-6">
               <div class="card mt-5">
                 <div class="card-body">
                   <h2 class="text-center">Sign Up</h2>
-                  <form id="signupForm">
+                  <form id="signupForm" novalidate>
                     <div class="form-group">
                       <label for="username">Username</label>
                       <input
@@ -76,6 +97,9 @@
                         required
                       />
                     </div>
+                    <div class="invalid-feedback">
+                      Username must consist of minimum 3 letters/numbers.
+                    </div>
                     <div class="form-group">
                       <label for="email">Email</label>
                       <input
@@ -86,6 +110,9 @@
                         placeholder="Enter your email"
                         required
                       />
+                      <div class="invalid-feedback">
+                        Email must be valid and end with @stud.noroff.no
+                      </div>
                     </div>
                     <div class="form-group">
                       <label for="password">Password</label>
@@ -96,8 +123,16 @@
                         class="form-control"
                         placeholder="Enter your password"
                         required
+                        minlength="8"
                       />
+                      <div class="invalid-feedback">
+                        Password must be at least 8 characters long.
+                      </div>
                     </div>
+                    <div
+                      id="signUpErrorMessage"
+                      class="mt-2 mb-2 invalid-feedback"
+                    ></div>
                     <button type="submit" class="btn btn-primary btn-block">
                       Sign Up
                     </button>
@@ -111,6 +146,7 @@
           </div>
         </div>
       </section>
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

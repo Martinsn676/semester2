@@ -32,4 +32,10 @@ export const lsList = {
     const list = await JSON.parse(localStorage.getItem(name));
     return list;
   },
+  /**
+   * Deletes all local saves
+   */
+  async clearAll() {
+    localStorage.clear();
+  },
 };
