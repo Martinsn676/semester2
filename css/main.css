@@ -27,7 +27,7 @@
 
 .modal-dialog {
   max-width: 800px; /* Set maximum width */
-  max-height: 80%;
+  max-height: 70%;
 }
 .modal-dialog .modal-content {
   height: 100%;

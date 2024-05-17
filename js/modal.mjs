@@ -57,7 +57,7 @@ export const modal = {
     };
 
     const response = await api.makeCall(api.endListings, api.post, 2, body);
-    console.log(response);
+
     if (response.status == 201) {
       document.getElementById("create-post-feedback").innerText =
         "Succesfully created";
@@ -160,6 +160,8 @@ export const modal = {
             false,
             ["_seller=true", "_bids=true"]
           );
+          const credits = document.getElementById("user-credits");
+          credits.innerText = Number(credits.innerText) - bidValue;
           this.displayListing(refresh.data);
         } else {
           console.log("response", response.data[0].message);
