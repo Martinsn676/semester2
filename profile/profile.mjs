@@ -34,7 +34,6 @@ profileContainer.innerHTML = `
                 Save
             </button>
         </form>
-    <h4 class="card-title text-center">${profile.name}</h4>
     <p class="card-text ">${editHandler.init(profile, "bio")}</p>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">

@@ -73,7 +73,7 @@ export const listingHandler = {
   async template(items) {
     let html = "";
     const userData = await lsList.get("userData");
-    const userEmail = userData.email;
+    const userEmail = userData ? userData.email : "none";
     items.forEach((item) => {
       if (this.blacklistCheck(item)) {
         const isOwner = item.seller.email == userEmail;

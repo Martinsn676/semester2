@@ -30,7 +30,7 @@ if (isSignedIn) {
 
           </div>
         </div>
-        <span class=" badge badge-success badge-pill">${profileResponse.data.credits}</span>`;
+        <span id="user-credits" class=" badge badge-success badge-pill">${profileResponse.data.credits}</span>`;
   }
 } else {
   document.querySelector("header").innerHTML = template.headerGuest();
