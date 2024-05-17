@@ -4,68 +4,75 @@ export const api = {
   baseUrl: "https://v2.api.noroff.dev",
   endProfiles: "/auction/profiles",
   endListings: "/auction/listings",
+  endListingSearch: "/auction/listings/search?q=",
   endRegister: "/auth/register",
   endLogin: "/auth/login",
   endApiKey: "/auth/create-api-key",
-  listingExtras: ["_seller", "_bids"],
   get: "GET",
   post: "POST",
   put: "PUT",
+  del: "DELETE",
   /**
    * Make any apicall
-   * @param {variable} endpoint Choose an endpoint
+   * @param {variable} endPoint Choose an endpoint
    * @param {array} endUrl Optional, add an endurl
    * @param {variable} method Choose a method to be used
    * @param {object} body The content of the call
    */
-  async makeCall(endpoint, method, security = 0, body = false, endUrl = false) {
-    let endApi = endUrl ? endUrl : "";
-    if (Array.isArray(endUrl)) {
-      endApi = this.buildEndUrl(endUrl);
-    }
-    console.log("endpoint", endpoint);
+  async makeCall(endPoint, method, security = 0, body = false, endUrl = false) {
+    console.trace();
+    try {
+      let endApi = this.baseUrl + endPoint;
 
-    const fetchBody = {
-      method: method,
-    };
-    if (security == 0) {
-      fetchBody.headers = {
-        "Content-Type": "application/json",
+      if (Array.isArray(endUrl)) {
+        endApi += endPoint.includes("?") ? "&" : "?";
+        endApi += this.buildEndUrl(endUrl, endPoint);
+      }
+
+      const fetchBody = {
+        method: method,
       };
-    }
-    if (security == 1) {
-      const accessToken = await lsList.get("accessToken");
-      fetchBody.headers = { Authorization: `Bearer ${accessToken}` };
-    }
-    if (security == 2) {
-      const accessToken = await lsList.get("accessToken");
-      const apiKey = await lsList.get("apiKey");
-      fetchBody.headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "X-Noroff-API-Key": apiKey,
-      };
-    }
-    if (body) {
-      fetchBody.body = JSON.stringify(body);
-    }
-    const response = await this.fetchApi(
-      this.baseUrl + endpoint + endApi,
-      fetchBody
-    );
-    const json = await response.json();
-    if (json.statusCode == 401) {
-      alert(
-        "You are not allowed to do this, you are being signed out. Please log in again"
-      );
-      window.location.href = "../index.html";
-      return;
-    }
-    console.log(json, response.status);
-    if (json.data) {
-      return { data: json.data, status: response.status };
-    } else {
-      return false;
+      if (security == 0) {
+        fetchBody.headers = {
+          "Content-Type": "application/json",
+        };
+      }
+      if (security == 1) {
+        const userData = await lsList.get("userData");
+        fetchBody.headers = { Authorization: `Bearer ${userData.accessToken}` };
+      }
+      if (security == 2) {
+        const userData = await lsList.get("userData");
+        const apiKey = await lsList.get("apiKey");
+        fetchBody.headers = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userData.accessToken}`,
+          "X-Noroff-API-Key": apiKey,
+        };
+      }
+      if (body) {
+        fetchBody.body = JSON.stringify(body);
+      }
+      const response = await this.fetchApi(endApi, fetchBody);
+      console.log("response", response);
+      const json = await response.json();
+      if (json.statusCode == 401 && security > 0) {
+        alert(
+          "You are not allowed to do this, you are being signed out. Please log in again"
+        );
+        window.location.href = "../index.html";
+        return;
+      }
+      console.log(json, response.status);
+      if (!json.data) {
+      }
+      if (json.data) {
+        return { data: json.data, status: response.status };
+      } else {
+        return { data: json.errors, status: response.status };
+      }
+    } catch (error) {
+      console.warn(error);
     }
   },
   /**
@@ -84,20 +91,13 @@ export const api = {
       return null; // or throw error if needed
     }
   },
-  buildEndUrl(endUrl) {
+  buildEndUrl(endUrl, endPoint) {
     let url = "";
     endUrl.forEach((element, index) => {
-      console.log("element", element);
-      if (index === 0) {
-        url += "?";
-      } else {
+      if (index != 0) {
         url += "&";
       }
-      if (element.startsWith("_")) {
-        url += element + "=true";
-      } else {
-        url += element;
-      }
+      url += element;
     });
     return url;
   },

@@ -3,3 +3,10 @@
 @import "./scss/modal";
 @import "./scss/listings";
 @import "./scss/general";
+@import "./profile/profile";
+.btn-primary.disabled,
+.btn-primary:disabled {
+  color: #6c757d;
+  background-color: #e9ecef;
+  border-color: #e9ecef;
+}
