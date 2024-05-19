@@ -4,7 +4,7 @@ import { lsList } from "./lsList.mjs";
 import { template } from "./mainTemplates.mjs";
 import { modal } from "./modal.mjs";
 const isSignedIn = (await lsList.get("userData")) || false;
-console.log("isSignedIn", isSignedIn);
+
 if (isSignedIn) {
   document.querySelector("header").innerHTML = template.header();
   document

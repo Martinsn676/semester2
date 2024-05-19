@@ -13,7 +13,6 @@ export const editHandler = {
     setTimeout(() => {
       const thisEdit = document.getElementById("edit-" + string);
       thisEdit.addEventListener("click", (event) => {
-        console.log(event.target);
         if (thisEdit.dataset.mode != "editing") {
           thisEdit.dataset.mode = "editing";
 
@@ -62,6 +61,5 @@ export const editHandler = {
       thisEdit.dataset.mode = "";
       this.addAction(string);
     }
-    console.log("response", response);
   },
 };

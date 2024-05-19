@@ -23,7 +23,7 @@ export const modal = {
   async submitListing(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    console.log("formData.itemName", formData);
+
     const dateString = formData.get("endDate"); // Get the date string from the form
     const timeString = formData.get("endTime"); // Get the time string from the form
 
@@ -164,7 +164,6 @@ export const modal = {
           credits.innerText = Number(credits.innerText) - bidValue;
           this.displayListing(refresh.data);
         } else {
-          console.log("response", response.data[0].message);
           this.container.querySelector(".bid-message").innerText =
             response.data[0].message;
         }
@@ -179,9 +178,9 @@ export const modal = {
       listing.bids.length > 0
         ? listing.bids[listing.bids.length - 1].amount + 1
         : 1;
-    console.log("listing", listing);
+
     const userProfile = await lsList.get("userData");
-    console.log("userProfile", userProfile);
+
     let isOwner = false;
     if (!overrideIsOwner && listing.seller.email == userProfile.email) {
       isOwner = true;
@@ -224,7 +223,7 @@ export const modal = {
           const images = this.container
             .querySelector("#edit-images")
             .querySelectorAll("input");
-          console.log("images", images);
+
           const media = [];
           images.forEach((image) => {
             if (image.value != "") {
@@ -234,7 +233,7 @@ export const modal = {
               });
             }
           });
-          console.log("media", media);
+
           const body = {
             title: this.container.querySelector("#editTitle").value,
             media: media,
@@ -248,7 +247,6 @@ export const modal = {
           );
           if (response.status == 200) {
           }
-          console.log("response", response);
         });
     }
 

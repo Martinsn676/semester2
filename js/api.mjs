@@ -54,7 +54,7 @@ export const api = {
         fetchBody.body = JSON.stringify(body);
       }
       const response = await this.fetchApi(endApi, fetchBody);
-      console.log("response", response);
+
       const json = await response.json();
       if (json.statusCode == 401 && security > 0) {
         alert(
@@ -63,7 +63,7 @@ export const api = {
         window.location.href = "../index.html";
         return;
       }
-      console.log(json, response.status);
+
       if (!json.data) {
       }
       if (json.data) {
@@ -83,7 +83,6 @@ export const api = {
    */
   async fetchApi(url, postData) {
     try {
-      console.log("Fetching:", url, postData);
       const response = await fetch(url, postData);
       return response;
     } catch (error) {
