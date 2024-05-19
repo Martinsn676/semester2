@@ -246,10 +246,24 @@ export const modal = {
             body
           );
           if (response.status == 200) {
+            const refresh = await api.makeCall(
+              `${api.endListings}/${id}`,
+              api.get,
+              0,
+              false,
+              ["_seller=true", "_bids=true"]
+            );
+            console.log("refresh", refresh);
+            if ((refresh.status = 200)) {
+              this.displayListing(refresh.data, true);
+            }
+          } else {
+            document.querySelector(".edit-feedback-text").innerText =
+              "An error occured: " + response.data[0].message;
           }
         });
     }
-
+    console.log("isOwner", isOwner);
     return `
 <div class="modal-listing d-flex flex-column flex-lg-row">
   <div class="col-12 col-lg-6 left-side product-list-item d-flex flex-column  align-items-center" data-id="${
@@ -277,6 +291,11 @@ ${listing.media
     `
   )
   .join("")}
+${
+  listing.media.length < 2
+    ? '<input type="text" class="form-control mt-2" value="" id="editImage3">'
+    : ""
+}
 ${
   listing.media.length < 3
     ? '<input type="text" class="form-control mt-2" value="" id="editImage3">'
@@ -315,7 +334,7 @@ ${
     
       ${
         isOwner
-          ? `<textarea class="form-control mt-5" id="editDescription">${listing.description}</textarea>`
+          ? `<textarea class="form-control mt-5" id="editDescription">${listing.description}</textarea><div class="edit-feedback-text"></div>`
           : `<div class="card-body text-center"><p class="card-text">${listing.description}</p></div>`
       }
     

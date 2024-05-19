@@ -20,7 +20,6 @@ export const api = {
    * @param {object} body The content of the call
    */
   async makeCall(endPoint, method, security = 0, body = false, endUrl = false) {
-    console.trace();
     try {
       let endApi = this.baseUrl + endPoint;
 
